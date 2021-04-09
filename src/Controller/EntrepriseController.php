@@ -38,8 +38,6 @@ class EntrepriseController extends AbstractController
      */
     public function profil(): Response
     {
-        return $this->render('entreprise/index.html.twig', [
-            'controller_name' => 'EntrepriseController',
-        ]);
+        return $this->redirectToRoute('welcom');
     }
 }
