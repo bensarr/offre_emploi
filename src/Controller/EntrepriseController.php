@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Entreprise;
+use App\Entity\SecteurActivite;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,10 +13,12 @@ class EntrepriseController extends AbstractController
 {
     private $em;
     private $entrepriseRepository;
+    private $secteurRepository;
     public function __construct(EntityManagerInterface $em)
     {
         $this->em=$em;
         $this->entrepriseRepository=$this->em->getRepository(Entreprise::class);
+        $this->secteurRepository=$this->em->getRepository(SecteurActivite::class);
     }
 
     /**
@@ -25,7 +28,7 @@ class EntrepriseController extends AbstractController
     {
 
         return $this->render('entreprise/index.html.twig', [
-            'controller_name' => 'EntrepriseController',
+            'secteurs' => $this->secteurRepository->findAll(),
         ]);
     }
 
