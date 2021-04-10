@@ -113,10 +113,10 @@
         {
             {% if app.user.entreprise!=null%}
                 $('#val').text("{{ app.user.entreprise.description }}");
-                {% set tab=[] %}
+                {# % set tab=[] %}
                 {% for s in secteurs %}
                     {% set tab=tab|merge([s.id]) %}
-                {% endfor%}
+                {% endfor%#}
             {%endif%}
             //afficher l'editeur pour la description
             $('.editor').height(300).css({
