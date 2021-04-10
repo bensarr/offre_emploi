@@ -126,8 +126,7 @@
             //récupérer le champ saisit pour la description
             $('#btnSave,#btnSave2').click(function (){
                 var html = new Quill('.editor').root.innerHTML;
-                $('#description').val( html )
-               alert($("#description").val());
+                $('#description').val( html );
             });
             //charger image après selection
             $(".logo").change(function(e) {
