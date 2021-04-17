@@ -43,48 +43,47 @@
                 <div class="col-lg-12">
                         <h3 class="text-black mb-5 border-bottom pb-2">Mon Profil</h3>
                         <div class="form-group">
-                            <img src="{% if app.user.entreprise!=null%}{{ ('photoprofile/')}}{{ app.user.entreprise.logo }}" {% else%} {{ asset('templates/images/nologo.png') }} {%endif%}" alt="Image" class="imageD" width="150px" height="150px"><br>
+                            <img src="{% if app.user.entreprise!=null%}{% if app.user.entreprise.logo!=null%}{{ ('photoprofile/')}}{{ app.user.entreprise.logo }}{% else%} {{ ('photoprofile/nologo.png')}} {%endif%}{% else%} {{ ('photoprofile/nologo.png') }} {%endif%}" alt="Image" class="imageD" width="150px" height="150px"><br>
                         </div>
                         <div class="form-group">
                             <label class="btn btn-primary btn-md btn-file">
                                 Choisir Logo
-                                <input type="file" class="logo" id="logo" name="logo" value="{{ csrf_token('upload') }}" accept="image/png, image/jpeg">
+                                <input type="file" class="logo" id="logo" name="logo" accept="image/png, image/jpeg">
                             </label>
                         </div>
 
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="exemple@domaine.com" value="{{ app.user.email }}">
+                            <input type="text" readonly class="form-control" id="email" name="email" placeholder="exemple@domaine.com" value="{{ app.user.email }}">
                         </div>
                         <div class="form-group">
                             <label for="denomination">Dénomination</label>
-                            <input type="text" class="form-control" id="denomination" name="denomination" placeholder="Nom de l'Entreprise" {% if app.user.entreprise!=null%} value="{{ app.user.entreprise.nom }}" {%endif%}>
+                            <input required type="text" class="form-control" id="denomination" name="denomination" placeholder="Nom de l'Entreprise" {% if app.user.entreprise!=null%} value="{{ app.user.entreprise.nom }}" {%endif%}>
                         </div>
                         <div class="form-group">
                             <label for="telephone">Téléphone</label>
-                            <input type="text" class="form-control" id="telephone" name="telephone" placeholder="77 888 88 88" {% if app.user.entreprise!=null%} value="{{ app.user.entreprise.telephone }}" {%endif%}>
+                            <input required type="text" class="form-control" id="telephone" name="telephone" placeholder="77 888 88 88" {% if app.user.entreprise!=null%} value="{{ app.user.entreprise.telephone }}" {%endif%}>
                         </div>
                         <div class="form-group">
                             <label for="adresse">Adresse</label>
-                            <input type="text" class="form-control" id="adresse" name="adresse" placeholder="Rue Carnot..., Dakar" {% if app.user.entreprise!=null%} value="{{ app.user.entreprise.adresse }}" {%endif%}>
+                            <input required type="text" class="form-control" id="adresse" name="adresse" placeholder="Rue Carnot..., Dakar" {% if app.user.entreprise!=null%} value="{{ app.user.entreprise.adresse }}" {%endif%}>
                         </div>
 
                         <div class="form-group">
                             <label for="secteurs">Secteurs D'Activité</label>
-                            <select class="selectpicker border rounded" multiple="multiple" id="secteurs" name="secteurs[]" data-style="btn-black" data-width="100%" data-live-search="true" title="Choisissez vos Secteur d'Activité">
+                            <select required class="selectpicker border rounded" multiple="multiple" id="secteurs" name="secteurs[]" data-style="btn-black" data-width="100%" data-live-search="true" title="Choisissez vos Secteur d'Activité">
                                 {% for s in secteurs %}
-                                    <option value="{{ s.id }}">{{ s.libelle }}</option>
+                                    <option value="{{ s.id }}" {%if app.user.entreprise!=null and app.user.entreprise.secteurs!=null and app.user.entreprise.hasSecteurs(s)==true%} selected="selected"{%endif%}>{{ s.libelle }}</option>
                                 {% endfor%}
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <div class="editor" id="editor-1">
-                                <p id="val">Description de l'entreprise!</p>
-                            </div>
+                            <textarea required class="form-control" name="description" id="description">
+                                {% if app.user.entreprise!=null%} {{ app.user.entreprise.description }} {%endif%}
+                            </textarea>
                         </div>
-                        <input type="hidden" name="description" id="description">
                 </div>
 
             </div>
@@ -93,7 +92,7 @@
                 <div class="col-lg-4 ml-auto">
                     <div class="row">
                         <div class="col-6">
-                            <a href="#" class="btn btn-block btn-light btn-md"><span class="icon-open_in_new mr-2"></span>Preview</a>
+                            <a href="#" class="btn btn-block btn-light btn-md" id="test"><span class="icon-open_in_new mr-2"></span>Preview</a>
                         </div>
                         <div class="col-6">
                             <button type="submit" class="btn btn-block btn-primary btn-md" id="btnSave2">Enrégistrer</button>
@@ -101,6 +100,7 @@
                     </div>
                 </div>
             </div>
+                <input type="hidden" id="id" name="id" {% if app.user.entreprise!=null%} value="{{ app.user.entreprise.id }}" {% else%} value="0"{%endif%}>
                 <input type="hidden" name="entreprise_token"
                        value="{{ csrf_token('entreprise') }}"
                 >
@@ -111,22 +111,20 @@
     <script type="application/javascript">
         $(document).ready(function ()
         {
-            {% if app.user.entreprise!=null%}
-                $('#val').text("{{ app.user.entreprise.description }}");
-                {# % set tab=[] %}
-                {% for s in secteurs %}
-                    {% set tab=tab|merge([s.id]) %}
-                {% endfor%#}
-            {%endif%}
-            //afficher l'editeur pour la description
-            $('.editor').height(300).css({
-                cursor: "auto",
-                borderColor: "auto"
-            });
-            //récupérer le champ saisit pour la description
-            $('#btnSave,#btnSave2').click(function (){
-                var html = new Quill('.editor').root.innerHTML;
-                $('#description').val( html );
+            $('#btnSave,#btnSave2').click(function () {
+
+                if ($('#id').val() !== "0")
+                {
+                    if ($('#logo').val() === "")
+                    {
+                        {% if app.user.entreprise.logo!=null %}
+                            $('#logo').attr("value","{{ app.user.entreprise.logo }}");
+                        {% else %}
+                            $('#logo').attr("value","{{ ('nologo.png') }}");
+                        {% endif %}
+                        $('#logo').attr("type","text");
+                    }
+                }
             });
             //charger image après selection
             $(".logo").change(function(e) {

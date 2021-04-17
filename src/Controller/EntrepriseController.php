@@ -45,44 +45,53 @@ class EntrepriseController extends AbstractController
     public function profil(Request $request, string $uploadDir, FileUploader $uploaderFile): Response
     {
         if($request->isMethod("POST")) {
+
             if ($this->isCsrfTokenValid('entreprise', $request->request->get('entreprise_token'))) {
+
                 $entreprise = new Entreprise();
-                if ($request->request->get('denomination') != '' && $request->request->get('telephone') != '' && $request->request->get('email') != '' && $request->request->get('adresse') != '' && $request->request->get('description') != '') {
-                    $entreprise->setNom($request->request->get('denomination'));
-                    $entreprise->setEmail($request->request->get('email'));
-                    $entreprise->setAdresse($request->request->get('adresse'));
-                    $entreprise->setTelephone($request->request->get('telephone'));
-                    $entreprise->setLogo($request->request->get('logo'));
-                    $entreprise->setDescription($request->request->get('description'));
-                    $entreprise->setUser($this->getUser());
-                    $secteursId=$request->request->get('secteurs');
-                    foreach ($secteursId as $s) {
-                        $entreprise->addSecteur($this->secteurRepository->find($s));
-                    }
-
-                    if (!empty($request->files->get('logo'))) {
-                        $logoFile = $request->files->get('logo');
-
-                        //Recuperation du nom du fichier
-                        $logoname = $logoFile->getClientOriginalName();
-
-                        //On appelle le service de chargement du fichier dans le repertoir specifié
-                        $ok = $uploaderFile->upload($uploadDir, $logoFile, $logoname);
-
-                        //On teste si le fichier est bien chargé
-                        if (!$ok) {
-                            return $this->redirectToRoute('app_entreprise_edit');
-                        } else {
-                            $entreprise->setLogo($logoname);
-                        }
-                    }
-                    $this->em->persist($entreprise);
-                    $this->em->flush();
-                    return $this->redirectToRoute('welcom');
+                $id=$request->request->get('id');
+                if ( $id!= 0)
+                {
+                    $entreprise = $this->entrepriseRepository->find($id);
                 }
 
+                $entreprise->setNom($request->request->get('denomination'));
+                $entreprise->setEmail($this->getUser()->getEmail());
+                $entreprise->setAdresse($request->request->get('adresse'));
+                $entreprise->setTelephone($request->request->get('telephone'));
+                $entreprise->setLogo($request->request->get('logo'));
+                $entreprise->setDescription($request->request->get('description'));
+                $entreprise->setUser($this->getUser());
+                $secteursId=$request->request->get('secteurs');
+                $secteurs=[];
+                foreach ($secteursId as $s) {
+                    $secteurs[]=$this->secteurRepository->find($s);
+                }
+                $entreprise->setSecteurs($secteurs);
+                if (!empty($request->files->get('logo'))) {
+                    $logoFile = $request->files->get('logo');
+                    //Recuperation du nom du fichier
+                    $logoname = $logoFile->getClientOriginalName();
+
+                    //On appelle le service de chargement du fichier dans le repertoir specifié
+                    $ok = $uploaderFile->upload($uploadDir, $logoFile, $logoname);
+
+                    //On teste si le fichier est bien chargé
+                    if (!$ok) {
+                        return $this->redirectToRoute('app_entreprise_edit');
+                    } else {
+                        $entreprise->setLogo($logoname);
+                    }
+                }
+                if ( $id==0) {
+                    $this->em->persist($entreprise);
+                }
+                $this->em->flush();
+                return $this->redirectToRoute('welcom');
             }
+
         }
+        return $this->redirectToRoute('app_entreprise_edit');
 
     }
 }

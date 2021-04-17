@@ -185,7 +185,12 @@ class Entreprise
     {
         return $this->secteurs;
     }
+    public function setSecteurs(array $secteurs): self
+    {
+        $this->secteurs = $secteurs;
 
+        return $this;
+    }
     public function addSecteur(SecteurActivite $secteur): self
     {
         if (!$this->secteurs->contains($secteur)) {
@@ -200,6 +205,14 @@ class Entreprise
         $this->secteurs->removeElement($secteur);
 
         return $this;
+    }
+    public function hasSecteurs(SecteurActivite $secteur)
+    {
+        foreach ($this->secteurs as $s) {
+            if ($s->getId() == $secteur->getId())
+                return true;
+        }
+        return false;
     }
 
     public function getUser(): ?User
