@@ -112,19 +112,20 @@
         $(document).ready(function ()
         {
             $('#btnSave,#btnSave2').click(function () {
-
-                if ($('#id').val() !== "0")
-                {
-                    if ($('#logo').val() === "")
+                {% if app.user.entreprise!=null %}
+                    if ($('#id').val() !== "0")
                     {
-                        {% if app.user.entreprise.logo!=null %}
-                            $('#logo').attr("value","{{ app.user.entreprise.logo }}");
-                        {% else %}
-                            $('#logo').attr("value","{{ ('nologo.png') }}");
-                        {% endif %}
-                        $('#logo').attr("type","text");
+                        if ($('#logo').val() === "")
+                        {
+                            {% if app.user.entreprise.logo!=null %}
+                                $('#logo').attr("value","{{ app.user.entreprise.logo }}");
+                            {% else %}
+                                $('#logo').attr("value","{{ ('nologo.png') }}");
+                            {% endif %}
+                            $('#logo').attr("type","text");
+                        }
                     }
-                }
+                {% endif %}
             });
             //charger image après selection
             $(".logo").change(function(e) {

@@ -174,7 +174,6 @@ class Entreprise
                 $offre->setEntreprise(null);
             }
         }
-
         return $this;
     }
 

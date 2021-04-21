@@ -30,19 +30,14 @@ class Offre
     private $description;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=0, nullable=true)
+     * @ORM\Column(type="string", length=50)
      */
     private $niveau_etude;
 
     /**
-     * @ORM\Column(type="decimal", precision=10, scale=0, nullable=true)
+     * @ORM\Column(type="string", length=50)
      */
     private $nbr_annee_experience;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Domaine::class, mappedBy="offre")
-     */
-    private $domaines;
 
     /**
      * @ORM\ManyToOne(targetEntity=Entreprise::class, inversedBy="offres")
@@ -55,10 +50,14 @@ class Offre
      */
     private $demandes;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Domaine::class, inversedBy="offres")
+     */
+    private $domaines;
+
     public function __construct()
     {
         $this->domaines = new ArrayCollection();
-        $this->demandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -114,36 +113,6 @@ class Offre
         return $this;
     }
 
-    /**
-     * @return Collection|Domaine[]
-     */
-    public function getDomaines(): Collection
-    {
-        return $this->domaines;
-    }
-
-    public function addDomaine(Domaine $domaine): self
-    {
-        if (!$this->domaines->contains($domaine)) {
-            $this->domaines[] = $domaine;
-            $domaine->setOffre($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDomaine(Domaine $domaine): self
-    {
-        if ($this->domaines->removeElement($domaine)) {
-            // set the owning side to null (unless already changed)
-            if ($domaine->getOffre() === $this) {
-                $domaine->setOffre(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getEntreprise(): ?Entreprise
     {
         return $this->entreprise;
@@ -185,4 +154,34 @@ class Offre
 
         return $this;
     }
+
+    /**
+     * @return Collection|Domaine[]
+     */
+    public function getDomaines(): Collection
+    {
+        return $this->domaines;
+    }
+    public function setDomaines(array $domaines): self
+    {
+        $this->domaines = $domaines;
+
+        return $this;
+    }
+    public function addDomaine(Domaine $domaine): self
+    {
+        if (!$this->domaines->contains($domaine)) {
+            $this->domaines[] = $domaine;
+        }
+
+        return $this;
+    }
+
+    public function removeDomaine(Domaine $domaine): self
+    {
+        $this->domaines->removeElement($domaine);
+
+        return $this;
+    }
+
 }
