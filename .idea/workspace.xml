@@ -2,17 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fe865de1-81b3-4ec2-bc00-65d497fd37f9" name="Default Changelist" comment="Completer profil Entreprise Partie Font &amp; Back">
+      <change afterPath="$PROJECT_DIR$/.idea/phpunit.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210402001609.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210405130958.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20210407180541.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/WelcomController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/WelcomController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210421031243.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210421043557.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/OffreController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/OffreController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Domaine.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Domaine.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Entreprise.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Entreprise.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Offre.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Offre.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/entreprise/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entreprise/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/layout.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layout.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/welcom/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/welcom/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,7 +20,9 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution />
+    <execution>
+      <executable path="composer" />
+    </execution>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -149,7 +149,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/templates/images" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -157,7 +157,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="Symfony2.SettingsForm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -170,6 +170,12 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\bensa\Documents\ME\DEV\symfony\OffreEmploi\public\photoprofile" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="phpunit.xml.dist" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner scope="XML" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -216,6 +222,8 @@
       <workItem from="1618535794016" duration="9836000" />
       <workItem from="1618922431841" duration="709000" />
       <workItem from="1618942619667" duration="19880000" />
+      <workItem from="1619035176262" duration="2197000" />
+      <workItem from="1619037607244" duration="2508000" />
     </task>
     <task id="LOCAL-00001" summary="Completer profil Entreprise Partie Font">
       <created>1617940037360</created>

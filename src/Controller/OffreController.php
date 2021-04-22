@@ -49,10 +49,7 @@ class OffreController extends AbstractController
             $offre->setNiveauEtude($request->request->get('niveau_etude'));
             $offre->setNbrAnneeExperience($request->request->get('annee_experience'));
             $domainesId=$request->request->get('domaines');
-            $domaines=[];
-            foreach ($domainesId as $d) {
-                $domaines[]=$this->domaineRepository->find($d);
-            }
+            $domaines=$this->domaineRepository->find($domainesId);
             $offre->setDomaines($domaines);
 
             if ( $id==0) {

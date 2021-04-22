@@ -51,7 +51,7 @@ class Offre
     private $demandes;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Domaine::class, inversedBy="offres")
+     * @ORM\ManyToOne(targetEntity=Domaine::class, inversedBy="offres")
      */
     private $domaines;
 
@@ -155,31 +155,14 @@ class Offre
         return $this;
     }
 
-    /**
-     * @return Collection|Domaine[]
-     */
-    public function getDomaines(): Collection
+    public function getDomaines(): ?Domaine
     {
         return $this->domaines;
     }
-    public function setDomaines(array $domaines): self
+
+    public function setDomaines(?Domaine $domaines): self
     {
         $this->domaines = $domaines;
-
-        return $this;
-    }
-    public function addDomaine(Domaine $domaine): self
-    {
-        if (!$this->domaines->contains($domaine)) {
-            $this->domaines[] = $domaine;
-        }
-
-        return $this;
-    }
-
-    public function removeDomaine(Domaine $domaine): self
-    {
-        $this->domaines->removeElement($domaine);
 
         return $this;
     }

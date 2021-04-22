@@ -303,7 +303,7 @@
                         </div>
                         <div class="form-group field_wrapper">
                             <label for="domaines" class="col-form-label-lg">Domaines</label>
-                            <select required class="selectpicker border rounded" multiple="multiple" id="domaines" name="domaines[]" data-style="btn-black" data-width="100%" data-live-search="true" title="Choisissez les Domaines recherchés">
+                            <select required class="selectpicker border rounded" id="domaines" name="domaines" data-style="btn-black" data-width="100%" data-live-search="true" title="Choisissez le Domaine recherché">
                                 {% for d in domaines %}
                                     <option value="{{ d.id }}">{{ d.libelle }}</option>
                                 {% endfor%}

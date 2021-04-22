@@ -35,7 +35,7 @@ class Domaine
     private $profiles;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Offre::class, mappedBy="domaines")
+     * @ORM\OneToMany(targetEntity=Offre::class, mappedBy="domaines")
      */
     private $offres;
 
@@ -129,7 +129,7 @@ class Domaine
     {
         if (!$this->offres->contains($offre)) {
             $this->offres[] = $offre;
-            $offre->addDomaine($this);
+            $offre->setDomaines($this);
         }
 
         return $this;
@@ -138,7 +138,10 @@ class Domaine
     public function removeOffre(Offre $offre): self
     {
         if ($this->offres->removeElement($offre)) {
-            $offre->removeDomaine($this);
+            // set the owning side to null (unless already changed)
+            if ($offre->getDomaines() === $this) {
+                $offre->setDomaines(null);
+            }
         }
 
         return $this;
