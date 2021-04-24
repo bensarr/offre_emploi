@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Demande;
+use App\Entity\Entreprise;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -18,7 +19,15 @@ class DemandeRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Demande::class);
     }
-
+    public function getAllByEntreprise(Entreprise $entreprise)
+    {
+        $qb=$this->createQueryBuilder('d')
+            ->join('d.offre','o')
+            ->join('o.entreprise','e')
+            ->where('e.id=:val')
+            ->setParameter('val',$entreprise->getId());
+        return$qb->getQuery()->getResult();
+    }
     // /**
     //  * @return Demande[] Returns an array of Demande objects
     //  */

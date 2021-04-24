@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fe865de1-81b3-4ec2-bc00-65d497fd37f9" name="Default Changelist" comment="Ajout/Edit Entreprise Partie Font &amp; Back">
-      <change afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
+    <list default="true" id="fe865de1-81b3-4ec2-bc00-65d497fd37f9" name="Default Changelist" comment="Delete Entreprise Partie Back/Font">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/EntrepriseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/EntrepriseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/OffreController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/OffreController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Demande.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Demande.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/DemandeRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/DemandeRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/entreprise/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entreprise/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/welcom/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/welcom/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,7 +221,7 @@
       <workItem from="1619035176262" duration="2197000" />
       <workItem from="1619037607244" duration="9388000" />
       <workItem from="1619139523557" duration="8537000" />
-      <workItem from="1619227178386" duration="6754000" />
+      <workItem from="1619227178386" duration="13331000" />
     </task>
     <task id="LOCAL-00001" summary="Completer profil Entreprise Partie Font">
       <created>1617940037360</created>
@@ -294,7 +293,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619058638797</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Delete Entreprise Partie Back/Font">
+      <created>1619234023301</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1619234023301</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -320,6 +326,7 @@
     <MESSAGE value="Completer profil Entreprise Partie Font &amp; Back" />
     <MESSAGE value="Ajout Entreprise Partie Font &amp; Back" />
     <MESSAGE value="Ajout/Edit Entreprise Partie Font &amp; Back" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout/Edit Entreprise Partie Font &amp; Back" />
+    <MESSAGE value="Delete Entreprise Partie Back/Font" />
+    <option name="LAST_COMMIT_MESSAGE" value="Delete Entreprise Partie Back/Font" />
   </component>
 </project>

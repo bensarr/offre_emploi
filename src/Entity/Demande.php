@@ -44,6 +44,12 @@ class Demande
      */
     private $offre;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $reponse;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -107,5 +113,21 @@ class Demande
         $this->offre = $offre;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReponse()
+    {
+        return $this->reponse;
+    }
+
+    /**
+     * @param mixed $reponse
+     */
+    public function setReponse($reponse): void
+    {
+        $this->reponse = $reponse;
     }
 }
