@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Demande;
 use App\Entity\Entreprise;
 use App\Entity\SecteurActivite;
 use App\Service\FileUploader;
@@ -16,11 +17,13 @@ class EntrepriseController extends AbstractController
     private $em;
     private $entrepriseRepository;
     private $secteurRepository;
+    private $demandeRepository;
     public function __construct(EntityManagerInterface $em)
     {
         $this->em=$em;
         $this->entrepriseRepository=$this->em->getRepository(Entreprise::class);
         $this->secteurRepository=$this->em->getRepository(SecteurActivite::class);
+        $this->demandeRepository=$this->em->getRepository(Demande::class);
     }
 
     /**
@@ -28,9 +31,9 @@ class EntrepriseController extends AbstractController
      */
     public function index(): Response
     {
-
         return $this->render('entreprise/index.html.twig', [
             'secteurs' => $this->secteurRepository->findAll(),
+            'demandes' => $this->demandeRepository->getAllByEntreprise($this->getUser()->getEntreprise()),
         ]);
     }
 

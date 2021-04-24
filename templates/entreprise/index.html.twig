@@ -107,6 +107,106 @@
             </form>
         </div>
     </section>
+    <!--Partie Demande-->
+    <section class="site-section">
+        <div class="container">
+
+            <div class="row mb-5 justify-content-center">
+                <div class="col-md-7 text-center">
+                    <h2 class="section-title mb-2">Les Demandes d'Emploi</h2>
+                </div>
+            </div>
+            {%if app.user!=null%}
+                {%if app.user.entreprise!=null%}
+                    {%if demandes is not empty%}
+                        <ul class="job-listings mb-5">
+                            {% for d in demandes %}
+                                <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+                                    <a href="#" data="{{ d.id }}-{{ d.cv }}"{#-{{ d.description }}-{{ d.getNiveauEtude }}-{{ d.getNbrAnneeExperience }}-{{ d.domaines.id }}" #} id="editDemande"
+                                       role="button" data-toggle="modal" data-target="#offreModal"></a>
+                                    <div class="job-listing-logo">
+                                        <img src="{{ ('photoprofile/')}}{{ d.demandeur.photo }}" class="img-fluid">
+                                    </div>
+
+                                    <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+                                        <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
+                                            <h2>{{ d.demandeur.getNomPrenom }}</h2>
+                                            <strong>{{ d.offre.titre }}</strong>
+                                        </div>
+                                        <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
+                                            <span class="icon-room"></span> Dakar, Dakar
+                                        </div>
+                                        <div class="job-listing-meta">
+                                        <span class="badge badge-danger">
+                                            <a type="button" href="{{ path('delete_offre',{id:d.id}) }}">Delete</a>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {%else%}
+                        <div class="row mb-5 justify-content-center">
+                            <div class="col-md-7 text-center">
+                                <h2 class="section-title text-primary mb-2">Aucune Offre Enregistrée</h2>
+                            </div>
+                        </div>
+                    {%endif%}
+                {%else%}
+                    <div class="row mb-5 justify-content-center">
+                        <div class="col-md-7 text-center">
+                            <h2 class="section-title text-warning mb-2">Veuiller compléter votre profil avant tout!!!</h2>
+                        </div>
+                    </div>
+                {%endif%}
+            {%endif%}
+
+            <div class="row pagination-wrap">
+                <div class="col-md-6 text-center text-md-left mb-4 mb-md-0">
+                    <span>Showing 1-7 Of 43,167 Jobs</span>
+                </div>
+                <div class="col-md-6 text-center text-md-right">
+                    <div class="custom-pagination ml-auto">
+                        <a href="#" class="prev">Prev</a>
+                        <div class="d-inline-block">
+                            <a href="#" class="active">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#">4</a>
+                        </div>
+                        <a href="#" class="next">Next</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!--Modal display Demande-->
+    <div class="modal fade" id="offreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="offreModalLabel">Demande</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="form1">
+                    <div class="modal-body">
+                        <embed id="cv" type="application/pdf" rameBorder="0"
+                               scrolling="auto"
+                               height="750"
+                               width="100%">
+                    </div>
+                    <input type="hidden" id="idDemande" name="idDemande" value="0">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a id="acceptDemande" class="btn btn-warning">Enregister</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="application/javascript">
         $(document).ready(function ()
@@ -138,6 +238,12 @@
                     }
                     reader.readAsDataURL(file);
                 }
+            });
+            $('#editDemande').click(function () {
+                var data = $(this).attr("data").split('-');
+                $('#idDemande').val(data[0]);
+                $('#cv').attr('src',"{{ asset('photoprofile/')}}"+data[1]);
+                $('#acceptDemande').attr('href',"{{ path('app_demande_accept',{'id':'x'})}}".replace("x",$('#idDemande').val()));
             });
         });
     </script>
