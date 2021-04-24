@@ -62,4 +62,18 @@ class OffreController extends AbstractController
         return $this->redirectToRoute('welcom');
 
     }
+    /**
+     * @Route("/offre/delete/{id}", name="delete_offre")
+     */
+    public function delete($id)
+    {
+        $o=$this->offreRepository->find($id);
+        if($o!=null)
+        {
+            $this->em->remove($o);
+            $this->em->flush();
+        }
+        return $this->redirectToRoute('welcom');
+    }
+
 }

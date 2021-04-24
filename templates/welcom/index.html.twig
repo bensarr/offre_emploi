@@ -110,7 +110,7 @@
 
             <div class="row mb-5 justify-content-center">
                 <div class="col-md-7 text-center">
-                    <h2 class="section-title mb-2">43,167 Offres d'emploi répertoriées</h2>
+                    <h2 class="section-title mb-2">Les Offres d'Emploi Enrégistrés</h2>
                 </div>
             </div>
             {%if app.user!=null%}
@@ -119,7 +119,7 @@
                     <ul class="job-listings mb-5">
                         {% for o in offres %}
                             <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-                                <a href="#" data-value="{{ o.id }}-{{ o.titre }}-{{ o.description }}-{{ o.getNiveauEtude }}-{{ o.getNbrAnneeExperience }}-{{ o.domaines.id }}" id="editOffre"
+                                <a href="#" data="{{ o.id }}-{{ o.titre }}-{{ o.description }}-{{ o.getNiveauEtude }}-{{ o.getNbrAnneeExperience }}-{{ o.domaines.id }}" id="editOffre"
                                    role="button" data-toggle="modal" data-target="#offreModal"></a>
                                 <div class="job-listing-logo">
                                     <img src="{{ ('photoprofile/')}}{{ app.user.entreprise.logo }}" alt="Free Website Template by Free-Template.co" class="img-fluid">
@@ -134,7 +134,9 @@
                                         <span class="icon-room"></span> Dakar, Dakar
                                     </div>
                                     <div class="job-listing-meta">
-                                        <span class="badge badge-danger">À temps partiel</span>
+                                        <span class="badge badge-danger">
+                                            <a type="button" href="{{ path('delete_offre',{id:o.id}) }}">Delete</a>
+                                        </span>
                                     </div>
                                 </div>
                             </li>
@@ -288,25 +290,28 @@
                         </div>
                         <div class="form-group field_wrapper">
                             <label for="niveau_etude" class="col-form-label-lg">Niveau d'Etude</label>
-                            <select required class="selectpicker border rounded" id="niveau_etude" name="niveau_etude" data-style="btn-black" data-width="100%" data-live-search="true" title="Choisissez le niveau d'Etude recherché">
+                            <select required class="selectpicker border rounded niveau_etudes" id="niveau_etude" name="niveau_etude" data-style="btn-black" data-width="100%" data-live-search="true" title="Choisissez le niveau d'Etude recherché">
+                                <option value="0" disabled selected>choisir niveau d'Etude</option>
                                 {% for n in niveau_etudes %}
-                                    <option value="{{ n }}" selected>{{ n }}</option>
+                                    <option value="{{ n }}">{{ n }}</option>
                                 {% endfor%}
                             </select>
                         </div>
                         <div class="form-group field_wrapper">
                             <label for="annee_experience" class="col-form-label-lg">Année d'Expérience</label>
                             <select required class="selectpicker border rounded" id="annee_experience" name="annee_experience" data-style="btn-black" data-width="100%" data-live-search="true" title="Choisissez l'année d'Expérience recherchée">
+                                <option value="0" disabled selected>choisir année d'Expérience</option>
                                 {% for a in annee_experiences %}
-                                    <option value="{{ a }}" selected>{{ a }}</option>
+                                    <option value="{{ a }}">{{ a }}</option>
                                 {% endfor%}
                             </select>
                         </div>
                         <div class="form-group field_wrapper">
                             <label for="domaines" class="col-form-label-lg">Domaines</label>
                             <select required class="selectpicker border rounded" id="domaines" name="domaines" data-style="btn-black" data-width="100%" data-live-search="true" title="Choisissez le Domaine recherché">
+                                <option value="0" disabled selected>choisir domaine</option>
                                 {% for d in domaines %}
-                                    <option value="{{ d.id }}" selected>{{ d.libelle }}</option>
+                                    <option value="{{ d.id }}">{{ d.libelle }}</option>
                                 {% endfor%}
                             </select>
                         </div>
@@ -314,6 +319,7 @@
                     <input type="hidden" id="id" name="id" value="0">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <div class="btnDelete"><a id="btnDelete" type="button" class="btn btn-danger">Supprimer</a></div>
                         <button id="saveOffre" type="submit" class="btn btn-primary">Enregister</button>
                     </div>
                 </form>
@@ -322,20 +328,25 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="application/javascript">
+        function selectFalse() {
+        }
         $(document).ready(function (){
             $('#nouveauoffre').click(function () {
-                $('#niveau_etude option').prop("selected",false);
-                $('#annee_experience option').prop("selected",false);
-                $('#domaines option').prop("selected",false);
-            })
+                $('#id').val(0);
+                $('#titre').val("");
+                $('#description').val("");
+                $('#niveau_etude').val("0").change();
+                $('#annee_experience').val("0").change();
+                $('#domaines').val("0").change();
+            });
             $('#editOffre').click(function () {
-                var data = $(this).attr("data-value").split('-');
+                var data = $(this).attr("data").split('-');
                 $('#id').val(data[0]);
                 $('#titre').val(data[1]);
                 $('#description').val(data[2]);
-                $('#niveau_etude').val(data[3]);
-                $('#annee_experience').val(data[4]);
-                $('#domaines').val(data[5]);
+                $('#niveau_etude').val(data[3]).change();
+                $('#annee_experience').val(data[4]).change();
+                $('#domaines').val(data[5]).change();
             });
         });
     </script>

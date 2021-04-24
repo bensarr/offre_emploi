@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fe865de1-81b3-4ec2-bc00-65d497fd37f9" name="Default Changelist" comment="Ajout Entreprise Partie Font &amp; Back">
+    <list default="true" id="fe865de1-81b3-4ec2-bc00-65d497fd37f9" name="Default Changelist" comment="Ajout/Edit Entreprise Partie Font &amp; Back">
+      <change afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/EntrepriseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/EntrepriseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/OffreController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/OffreController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/entreprise/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/entreprise/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/welcom/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/welcom/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -141,7 +145,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/photoprofile" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -154,6 +158,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/photoprofile" />
       <recent name="C:\Users\bensa\Documents\ME\DEV\symfony\OffreEmploi\public\templates\images" />
       <recent name="C:\MyProject\Emploi\emploi\public\templates" />
       <recent name="C:\MyProject\Emploi\emploi\public\template\nante" />
@@ -215,7 +220,9 @@
       <workItem from="1618922431841" duration="709000" />
       <workItem from="1618942619667" duration="19880000" />
       <workItem from="1619035176262" duration="2197000" />
-      <workItem from="1619037607244" duration="8404000" />
+      <workItem from="1619037607244" duration="9388000" />
+      <workItem from="1619139523557" duration="8537000" />
+      <workItem from="1619227178386" duration="6754000" />
     </task>
     <task id="LOCAL-00001" summary="Completer profil Entreprise Partie Font">
       <created>1617940037360</created>
@@ -280,7 +287,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619051919975</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Ajout/Edit Entreprise Partie Font &amp; Back">
+      <created>1619058638797</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1619058638797</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -305,6 +319,7 @@
     <MESSAGE value="Completer profil Entreprise Partie Font" />
     <MESSAGE value="Completer profil Entreprise Partie Font &amp; Back" />
     <MESSAGE value="Ajout Entreprise Partie Font &amp; Back" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajout Entreprise Partie Font &amp; Back" />
+    <MESSAGE value="Ajout/Edit Entreprise Partie Font &amp; Back" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout/Edit Entreprise Partie Font &amp; Back" />
   </component>
 </project>
